@@ -7,8 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <!-- External css -->
-    <link rel="stylesheet" href="style.css">
     <style>
         body {
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url(images/bg-image.jpg);
@@ -45,7 +43,6 @@
             const locationName = document.getElementById('location-name');
             const temperature = document.getElementById('temperature');
             const description = document.getElementById('description');
-            // document.getElementById('temp-scale').style.display = 'block';
 
             fetch('https://api.openweathermap.org/data/2.5/weather?q='+inputLocation+'&appid=1a65cc23cd3e9ad0090161f60941c698')
             .then(Response => Response.json())
@@ -61,7 +58,7 @@
                 description.innerText = descriptionValue;
                 // console.log(weatherValue);
             })
-            .catch(err => alert("Wrong city name"))
+            .catch(err => alert("Please enter the correct city name"))
         })
         
         
