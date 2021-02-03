@@ -9,10 +9,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         body {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url(images/bg-image.jpg);
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), url(images/bg-image.jpg);
             background-repeat: no-repeat;
             background-size: cover;
             height: 100vh;
+        }
+        img{
+            filter: grayscale(100%);
         }
     </style>
 </head>
@@ -28,7 +31,7 @@
             </div>
         </form>
         <div class="weather-status text-white text-center">
-            <img id="weather-icon" src="https://openweathermap.org/img/wn/02d@2x.png" alt="">
+            <img id="weather-icon" src="" alt="">
             <h1 id="location-name"></h1>
             <h3><span id="temperature"></span></h3>
             <h1 id="description" class="lead"></h1>
@@ -39,7 +42,6 @@
     <script>
         document.getElementById('button').addEventListener('click', function(){
             const inputLocation = document.getElementById('input-location').value;
-            const weatherIcon = document.getElementById('weather-icon');
             const locationName = document.getElementById('location-name');
             const temperature = document.getElementById('temperature');
             const description = document.getElementById('description');
@@ -47,8 +49,7 @@
             fetch('https://api.openweathermap.org/data/2.5/weather?q='+inputLocation+'&appid=1a65cc23cd3e9ad0090161f60941c698')
             .then(Response => Response.json())
             .then(data => {
-                // const weatherValue = data['weather'][0]['icon'];
-                // weatherIcon.innerText = weatherValue;
+                document.getElementById('weather-icon').src = "http://openweathermap.org/img/wn/"+data.weather[0].icon+"@2x.png";
                 const nameValue = data['name'];
                 const temperatureValue = data['main']['temp'];
                 const descriptionValue = data['weather'][0]['description'];
@@ -56,7 +57,7 @@
                 locationName.innerText = nameValue;
                 temperature.innerText = temperatureValue + ' °C';
                 description.innerText = descriptionValue;
-                // console.log(weatherValue);
+                console.log(data);
             })
             .catch(err => alert("Please enter the correct city name"))
         })
